@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #3498db, #2ecc71);
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#notesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Espacio entre las notas */
+    background-color: #2ecc71; /* Fondo verde */
+    padding: 15px; /* Espaciado interior para el contenedor de las notas */
+    border-radius: 8px; /* Borde redondeado */
+}
+
+.note {
+    width: calc(23.25% - 10px); /* Calcula el ancho de cada nota para ocupar aproximadamente un tercio del contenedor, descontando el espacio entre notas */
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #3498db; /* Borde azul */
+    border-radius: 4px;
+    background-color: #ecf0f1; /* Fondo azul claro */
+}
+
+.note textarea {
+    width: 100%; /* El textarea ocupa todo el ancho de la nota */
+    height: 150px; /* Altura del textarea */
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #2980b9; /* Borde azul más oscuro */
+    border-radius: 4px;
+    background-color: #ecf0f1; /* Fondo azul claro */
+    color: #2c3e50; /* Color de texto azul oscuro */
+    font-size: 14px;
+    resize: none; /* Evita que el usuario redimensione el textarea */
+}
+
+.note button {
+    width: 100%; /* El botón ocupa todo el ancho de la nota */
+    padding: 8px;
+    background-color: #3498db; /* Fondo azul */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.note button:hover {
+    background-color: #2980b9; /* Cambio de color al pasar el mouse sobre el botón */
+}
+
+#btnAddNote, #btnRemoveAll {
+    padding: 8px;
+    background-color: #2ecc71; /* Fondo verde */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-weight: bold; /* Letras en negrita */
+    transition: background-color 0.3s; 
+}
+#btnAddNote:hover, #btnRemoveAll:hover {
+    background-color: #27ae60; /* Cambio de color al pasar el mouse sobre el botón */
+}
+
+#btnRemoveAll {
+    background-color: #e74c3c; /* Fondo rojo */
+}
+#btnRemoveAll:hover {
+    background-color: #c0392b; /* Cambio de color al pasar el mouse sobre el botón */
+}
