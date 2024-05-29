@@ -1,3 +1,9 @@
+
+let btnAddNote = document.getElementById('btnAddNote');
+let btnRemoveAll = document.getElementById('btnRemoveAll');
+let notesContainer = document.getElementById('notesContainer');
+
+
 function startBD() {
     let request = window.indexedDB.open("notas");
     request.addEventListener("error", viewError);
@@ -24,6 +30,7 @@ function wareHouse(event) {
 
     }
 }
+
 function addNoteToDB(note, callback) {
     let transaction = bd.transaction(["Anotaciones"], "readwrite");
     let objectStore = transaction.objectStore("Anotaciones");
@@ -42,57 +49,6 @@ function addNoteToDB(note, callback) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    let btnAddNote = document.getElementById('btnAddNote');
-    let btnRemoveAll = document.getElementById('btnRemoveAll');
-    let notesContainer = document.getElementById('notesContainer');
-
-    // Mover la declaración de btnRemoveNote fuera de la función click de btnAddNote
-    let btnRemoveNote;
-
-    btnAddNote.addEventListener('click', function () {
-        let note = document.createElement('div');
-        note.classList.add('note');
-
-        let textarea = document.createElement('textarea');
-        textarea.placeholder = 'Escribe tu nota...';
-
-        // Mover la declaración de btnRemoveNote aquí
-        btnRemoveNote = document.createElement('button');
-        btnRemoveNote.textContent = 'Eliminar Nota';
-
-        btnRemoveNote.addEventListener('click', function () {
-            let noteId = note.getAttribute('id');
-            removeNoteFromDB(noteId);
-            notesContainer.removeChild(note);
-        });
-
-        note.appendChild(textarea);
-        note.appendChild(btnRemoveNote);
-
-        notesContainer.appendChild(note);
-//nuevo codigo para obtener el id de la nota
-        let noteText = textarea.value;
-        addNoteToDB({ noteText: noteText }, function (key) {
-            note.setAttribute('id', key);
-        });
-
-        // Guardar la nota cuando el textarea pierde el foco
-        textarea.addEventListener('blur', function () {
-            let noteText = textarea.value;
-            addNoteToDB({ noteText: noteText });
-        });
-    });
-
-    btnRemoveAll.addEventListener('click', function () {
-        removeAllNotesFromDB();
-        notesContainer.innerHTML = '';
-    });
-});
-
-
-window.addEventListener("load", startBD);
-
 function removeNoteFromDB(noteId) {
     let transaction = bd.transaction(["Anotaciones"], "readwrite");
     let objectStore = transaction.objectStore("Anotaciones");
@@ -106,6 +62,7 @@ function removeNoteFromDB(noteId) {
         console.log("Error al eliminar nota de la base de datos");
     });
 }
+
 function removeAllNotesFromDB() {
     let transaction = bd.transaction(["Anotaciones"], "readwrite");
     let objectStore = transaction.objectStore("Anotaciones");
@@ -119,3 +76,55 @@ function removeAllNotesFromDB() {
         console.log("Error al eliminar todas las notas de la base de datos");
     });
 }
+
+
+
+
+// Mover la declaración de btnRemoveNote fuera de la función click de btnAddNote
+let btnRemoveNote;
+
+btnAddNote.addEventListener('click', function () {
+    let note = document.createElement('div');
+    note.classList.add('note');
+
+    let textarea = document.createElement('textarea');
+    textarea.placeholder = 'Escribe tu nota...';
+
+    // Mover la declaración de btnRemoveNote aquí
+    btnRemoveNote = document.createElement('button');
+    btnRemoveNote.textContent = 'Eliminar Nota';
+
+    btnRemoveNote.addEventListener('click', function () {
+        let noteId = note.getAttribute('id');
+        removeNoteFromDB(noteId);
+        notesContainer.removeChild(note);
+    });
+
+    note.appendChild(textarea);
+    note.appendChild(btnRemoveNote);
+
+    notesContainer.appendChild(note);
+    //nuevo codigo para obtener el id de la nota
+    let noteText = textarea.value;
+    addNoteToDB({ noteText: noteText }, function (key) {
+        note.setAttribute('id', key);
+    });
+
+    // Guardar la nota cuando el textarea pierde el foco
+    textarea.addEventListener('blur', function () {
+        let noteText = textarea.value;
+
+    if
+
+        addNoteToDB({ noteText: noteText });
+    });
+});
+
+btnRemoveAll.addEventListener('click', function () {
+    removeAllNotesFromDB();
+    notesContainer.innerHTML = '';
+});
+
+
+
+window.addEventListener("load", startBD);
